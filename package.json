@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
+    "webpack": "webpack --progress --color --watch"
   },
   "dependencies": {
     "vue": "^2.4.4"
