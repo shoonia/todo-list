@@ -19,7 +19,8 @@
         :task="task",
         :edit="editTask",
         :makeChange="makeTask", 
-        :saveChange="saveTask"
+        :saveChange="saveTask",
+        :remove="removeTask"
       )
 
 </template>
@@ -61,6 +62,10 @@
 
       saveTask () {
         this.editTask = null;
+      },
+
+      removeTask (item) {
+        this.tasks = this.tasks.filter( task => task.id !== item.id );
       }
     }
   });

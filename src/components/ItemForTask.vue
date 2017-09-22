@@ -5,10 +5,13 @@
     :key="task.id"
     class="list-group-item mb-1"
   )
-    span(v-if="edit !== task")
+    span(v-if="edit !== task", @click="task.done = !task.done")
       span {{ task.text }}
-      span(@click="makeChange(task)").close
-        | edit
+      span.close
+        span(v-if="task.done", @click="remove(task)")
+          | remove
+        span(v-else, @click="makeChange(task)")
+          | edit
 
     span(v-else).input-group
       input(
@@ -19,18 +22,25 @@
       )
       span.input-group-btn
         button(
-          @click.prevent="saveChange",
+          @click="saveChange",
           type="button",
           title="save",
           class="btn btn-success"
         )
           | save
+        button(
+          @click="remove(task)",
+          type="button",
+          title="remove?",
+          class="btn btn-danger"
+        )
+          | remove
 
 </template>
 
 <script>
   const ItemForTask = Vue.component( 'item-for-task', {
-    props: [ 'task', 'edit', 'makeChange', 'saveChange' ]
+    props: [ 'task', 'edit', 'makeChange', 'saveChange', 'remove' ]
   });
 
   export default ItemForTask;

@@ -307,6 +307,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 
 
@@ -344,6 +345,10 @@ const TodoList = Vue.component('to-do-list', {
 
     saveTask() {
       this.editTask = null;
+    },
+
+    removeTask(item) {
+      this.tasks = this.tasks.filter(task => task.id !== item.id);
     }
   }
 });
@@ -435,9 +440,19 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 const ItemForTask = Vue.component('item-for-task', {
-  props: ['task', 'edit', 'makeChange', 'saveChange']
+  props: ['task', 'edit', 'makeChange', 'saveChange', 'remove']
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (ItemForTask);
@@ -461,21 +476,44 @@ var render = function() {
     },
     [
       _vm.edit !== _vm.task
-        ? _c("span", [
-            _c("span", [_vm._v(_vm._s(_vm.task.text))]),
-            _c(
-              "span",
-              {
-                staticClass: "close",
-                on: {
-                  click: function($event) {
-                    _vm.makeChange(_vm.task)
-                  }
+        ? _c(
+            "span",
+            {
+              on: {
+                click: function($event) {
+                  _vm.task.done = !_vm.task.done
                 }
-              },
-              [_vm._v("edit")]
-            )
-          ])
+              }
+            },
+            [
+              _c("span", [_vm._v(_vm._s(_vm.task.text))]),
+              _c("span", { staticClass: "close" }, [
+                _vm.task.done
+                  ? _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.remove(_vm.task)
+                          }
+                        }
+                      },
+                      [_vm._v("remove")]
+                    )
+                  : _c(
+                      "span",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.makeChange(_vm.task)
+                          }
+                        }
+                      },
+                      [_vm._v("edit")]
+                    )
+              ])
+            ]
+          )
         : _c("span", { staticClass: "input-group" }, [
             _c("input", {
               directives: [
@@ -513,14 +551,22 @@ var render = function() {
                 {
                   staticClass: "btn btn-success",
                   attrs: { type: "button", title: "save" },
+                  on: { click: _vm.saveChange }
+                },
+                [_vm._v("save")]
+              ),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button", title: "remove?" },
                   on: {
                     click: function($event) {
-                      $event.preventDefault()
-                      _vm.saveChange($event)
+                      _vm.remove(_vm.task)
                     }
                   }
                 },
-                [_vm._v("save")]
+                [_vm._v("remove")]
               )
             ])
           ])
@@ -616,7 +662,8 @@ var render = function() {
                 task: task,
                 edit: _vm.editTask,
                 makeChange: _vm.makeTask,
-                saveChange: _vm.saveTask
+                saveChange: _vm.saveTask,
+                remove: _vm.removeTask
               }
             })
           ],
