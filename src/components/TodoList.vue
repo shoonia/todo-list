@@ -1,11 +1,13 @@
 <template lang="pug">
 
+  -const placeholder = "What you should do...";
+
   div
-    form.mb-2
+    form(@submit.prevent="addTask").mb-2
       div.input-group
-        input.form-control
+        input(v-model="newTask", placeholder=placeholder, autofocus).form-control
         div.input-group-btn
-          button.btn.btn-outline-dark Add
+          button.btn.btn-dark Add
 
     div(v-for="t in tasks").list-group
       item-for-task(:id="t.id", :text="t.text", :done="t.done")
@@ -14,6 +16,7 @@
 
 <script>
   import ItemForTask from './ItemForTask.vue';
+  import getTasks from '../data/tasks';
 
   const TodoList = Vue.component( 'to-do-list', {
     components: {
@@ -22,10 +25,23 @@
 
     data () {
       return {
-        tasks: [
-          { id: 0, text: 'test', done: false },
-          { id: 1, text: 'next', done: false }
-        ]
+        tasks: getTasks(),
+        newTask: ''
+      }
+    },
+
+    methods: {
+      addTask () {
+        if (this.newTask.trim()) {
+
+          this.tasks = this.tasks.concat({
+            id: Date.now(),
+            text: this.newTask,
+            done: false
+          });
+
+          this.newTask = '';
+        }
       }
     }
   });

@@ -279,7 +279,8 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Vue) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ItemForTask_vue__ = __webpack_require__(12);
+/* WEBPACK VAR INJECTION */(function(Vue) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ItemForTask_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_tasks__ = __webpack_require__(11);
 //
 //
 //
@@ -294,6 +295,9 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+
 
 
 
@@ -304,8 +308,24 @@ const TodoList = Vue.component('to-do-list', {
 
   data() {
     return {
-      tasks: [{ id: 0, text: 'test', done: false }, { id: 1, text: 'next', done: false }]
+      tasks: Object(__WEBPACK_IMPORTED_MODULE_1__data_tasks__["a" /* default */])(),
+      newTask: ''
     };
+  },
+
+  methods: {
+    addTask() {
+      if (this.newTask.trim()) {
+
+        this.tasks = this.tasks.concat({
+          id: Date.now(),
+          text: this.newTask,
+          done: false
+        });
+
+        this.newTask = '';
+      }
+    }
   }
 });
 
@@ -313,70 +333,12 @@ const TodoList = Vue.component('to-do-list', {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._m(0),
-      _vm._l(_vm.tasks, function(t) {
-        return _c(
-          "div",
-          { staticClass: "list-group" },
-          [
-            _c("item-for-task", {
-              attrs: { id: t.id, text: t.text, done: t.done }
-            })
-          ],
-          1
-        )
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "mb-2" }, [
-      _c("div", { staticClass: "input-group" }, [
-        _c("input", { staticClass: "form-control" }),
-        _c("div", { staticClass: "input-group-btn" }, [
-          _c("button", { staticClass: "btn btn-outline-dark" }, [_vm._v("Add")])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3de47834", esExports)
-  }
-}
-
-/***/ }),
-/* 11 */,
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_ItemForTask_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1a54d3db_hasScoped_false_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_ItemForTask_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_ItemForTask_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1a54d3db_hasScoped_false_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_ItemForTask_vue__ = __webpack_require__(9);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -420,11 +382,12 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 13 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Vue) {//
+//
 //
 //
 //
@@ -439,7 +402,7 @@ const ItemForTask = Vue.component('item-for-task', {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -447,9 +410,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "list-group-item mb-1" }, [
-    _vm._v(_vm._s(_vm.id) + " " + _vm._s(_vm.text) + " " + _vm._s(_vm.done))
-  ])
+  return _c(
+    "div",
+    {
+      key: _vm.id,
+      staticClass: "list-group-item mb-1",
+      class: { "list-group-item-success": _vm.done }
+    },
+    [_c("span", [_vm._v(_vm._s(_vm.text))])]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -461,6 +430,109 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-1a54d3db", esExports)
   }
 }
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "form",
+        {
+          staticClass: "mb-2",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.addTask($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newTask,
+                  expression: "newTask"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                placeholder: "What you should do...",
+                autofocus: "autofocus"
+              },
+              domProps: { value: _vm.newTask },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.newTask = $event.target.value
+                }
+              }
+            }),
+            _vm._m(0)
+          ])
+        ]
+      ),
+      _vm._l(_vm.tasks, function(t) {
+        return _c(
+          "div",
+          { staticClass: "list-group" },
+          [
+            _c("item-for-task", {
+              attrs: { id: t.id, text: t.text, done: t.done }
+            })
+          ],
+          1
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-btn" }, [
+      _c("button", { staticClass: "btn btn-dark" }, [_vm._v("Add")])
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3de47834", esExports)
+  }
+}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getTasks;
+function getTasks () {
+  return [
+    { id: 0, text: 'test', done: false },
+    { id: 1, text: 'next', done: true }
+  ];
+}
+
 
 /***/ })
 /******/ ]);

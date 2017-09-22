@@ -1,6 +1,7 @@
 <template lang="pug">
 
-  div.list-group-item.mb-1 {{ id }} {{ text }} {{ done }}
+  div(:class="{'list-group-item-success': done }", :key="id").list-group-item.mb-1
+    span {{ text }}
 
 </template>
 
