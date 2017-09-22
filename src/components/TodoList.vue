@@ -1,16 +1,26 @@
 <template lang="pug">
 
-  -const placeholder = "What you should do...";
-
   div
-    form(@submit.prevent="addTask").mb-2
+    form(@submit.prevent="addTask").mb-3
       div.input-group
-        input(v-model="newTask", placeholder=placeholder, autofocus).form-control
+        input(
+          v-model="newTask",
+          type="text",
+          placeholder="What you should do...",
+          autofocus
+          class="form-control"
+        )
         div.input-group-btn
-          button.btn.btn-dark Add
+          button.btn.btn-dark
+            | Add
 
-    div(v-for="t in tasks").list-group
-      item-for-task(:id="t.id", :text="t.text", :done="t.done")
+    div(v-for="task in tasks").list-group
+      item-for-task(
+        :task="task",
+        :edit="editTask",
+        :makeChange="makeTask", 
+        :saveChange="saveTask"
+      )
 
 </template>
 
@@ -26,7 +36,8 @@
     data () {
       return {
         tasks: getTasks(),
-        newTask: ''
+        newTask: '',
+        editTask: null
       }
     },
 
@@ -34,7 +45,7 @@
       addTask () {
         if (this.newTask.trim()) {
 
-          this.tasks = this.tasks.concat({
+          this.tasks.push({
             id: Date.now(),
             text: this.newTask,
             done: false
@@ -42,6 +53,14 @@
 
           this.newTask = '';
         }
+      },
+
+      makeTask (item) {
+        this.editTask = item;
+      },
+
+      saveTask () {
+        this.editTask = null;
       }
     }
   });

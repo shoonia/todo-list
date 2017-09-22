@@ -231,7 +231,7 @@ module.exports = g;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_TodoList_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3de47834_hasScoped_false_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_TodoList_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3de47834_hasScoped_false_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_TodoList_vue__ = __webpack_require__(11);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -280,7 +280,17 @@ if (false) {(function () {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Vue) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ItemForTask_vue__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_tasks__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_tasks__ = __webpack_require__(10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -309,7 +319,8 @@ const TodoList = Vue.component('to-do-list', {
   data() {
     return {
       tasks: Object(__WEBPACK_IMPORTED_MODULE_1__data_tasks__["a" /* default */])(),
-      newTask: ''
+      newTask: '',
+      editTask: null
     };
   },
 
@@ -317,7 +328,7 @@ const TodoList = Vue.component('to-do-list', {
     addTask() {
       if (this.newTask.trim()) {
 
-        this.tasks = this.tasks.concat({
+        this.tasks.push({
           id: Date.now(),
           text: this.newTask,
           done: false
@@ -325,6 +336,14 @@ const TodoList = Vue.component('to-do-list', {
 
         this.newTask = '';
       }
+    },
+
+    makeTask(item) {
+      this.editTask = item;
+    },
+
+    saveTask() {
+      this.editTask = null;
     }
   }
 });
@@ -393,9 +412,32 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 const ItemForTask = Vue.component('item-for-task', {
-  props: ['id', 'text', 'done']
+  props: ['task', 'edit', 'makeChange', 'saveChange']
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (ItemForTask);
@@ -413,11 +455,76 @@ var render = function() {
   return _c(
     "div",
     {
-      key: _vm.id,
+      key: _vm.task.id,
       staticClass: "list-group-item mb-1",
-      class: { "list-group-item-success": _vm.done }
+      class: { "list-group-item-success": _vm.task.done }
     },
-    [_c("span", [_vm._v(_vm._s(_vm.text))])]
+    [
+      _vm.edit !== _vm.task
+        ? _c("span", [
+            _c("span", [_vm._v(_vm._s(_vm.task.text))]),
+            _c(
+              "span",
+              {
+                staticClass: "close",
+                on: {
+                  click: function($event) {
+                    _vm.makeChange(_vm.task)
+                  }
+                }
+              },
+              [_vm._v("edit")]
+            )
+          ])
+        : _c("span", { staticClass: "input-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.task.text,
+                  expression: "task.text"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.task.text },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13)
+                  ) {
+                    return null
+                  }
+                  _vm.saveChange(_vm.task)
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.task.text = $event.target.value
+                }
+              }
+            }),
+            _c("span", { staticClass: "input-group-btn" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { type: "button", title: "save" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.saveChange($event)
+                    }
+                  }
+                },
+                [_vm._v("save")]
+              )
+            ])
+          ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -436,6 +543,20 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getTasks;
+function getTasks () {
+  return [
+    { id: 0, text: 'test', done: false },
+    { id: 1, text: 'next', done: true }
+  ];
+}
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -446,7 +567,7 @@ var render = function() {
       _c(
         "form",
         {
-          staticClass: "mb-2",
+          staticClass: "mb-3",
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -467,6 +588,7 @@ var render = function() {
               ],
               staticClass: "form-control",
               attrs: {
+                type: "text",
                 placeholder: "What you should do...",
                 autofocus: "autofocus"
               },
@@ -484,13 +606,18 @@ var render = function() {
           ])
         ]
       ),
-      _vm._l(_vm.tasks, function(t) {
+      _vm._l(_vm.tasks, function(task) {
         return _c(
           "div",
           { staticClass: "list-group" },
           [
             _c("item-for-task", {
-              attrs: { id: t.id, text: t.text, done: t.done }
+              attrs: {
+                task: task,
+                edit: _vm.editTask,
+                makeChange: _vm.makeTask,
+                saveChange: _vm.saveTask
+              }
             })
           ],
           1
@@ -519,20 +646,6 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-3de47834", esExports)
   }
 }
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getTasks;
-function getTasks () {
-  return [
-    { id: 0, text: 'test', done: false },
-    { id: 1, text: 'next', done: true }
-  ];
-}
-
 
 /***/ })
 /******/ ]);
