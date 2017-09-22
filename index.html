@@ -7,15 +7,25 @@
   <meta name="author" content="Aleksandr Zaytsev, https://github.com/shoonia">
   <meta name="keywords" content="to do list, todo list, to-do list">
   <meta name="description" content="">
-  <title>To Do List</title>
+  <title>Todo List</title>
   <!-- <link rel="shortcut icon" type="image/x-icon" href="public/favicon.ico"> -->
   <!-- <link rel="stylesheet" type="text/css" href="public/style.css"> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
 
-  <div id="app">
-    <to-do-list />
+  <header class="navbar navbar-dark bg-dark mb-5">
+    <div class="container">
+      <a href="/" class="navbar-brand">Todo List</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <main id="app">
+        <to-do-list />
+      </main>
+    </div>
   </div>
 
   <noscript>
