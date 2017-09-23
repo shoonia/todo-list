@@ -17,14 +17,16 @@
             | Add
 
     div(v-if="tasks.length > 0")
-      div(v-for="task in tasks").list-group
-        item-for-task(
-          :task="task",
-          :edit="editTask",
-          :makeChange="makeTask", 
-          :saveChange="saveTask",
-          :remove="removeTask"
-        )
+      transition-group(name="fade", tag="div").list-group
+          item-for-task(
+            v-for="task in tasks",
+            :key="task.id",
+            :task="task",
+            :editor="editTask",
+            :setChange="changeTask",
+            :saveChange="saveTask",
+            :remove="removeTask"
+          )
     div(v-else).text-center.text-secondary.lead.mt-5
       | You don't have any tasks
 
@@ -33,6 +35,7 @@
 <script>
   import ItemForTask from './ItemForTask.vue';
   import getTasks from '../data/tasks';
+  import '../styles/fade.css'; /* class="fade-enter-active fade-leave-active fade-enter fade-leave-to" */
 
   const TodoList = Vue.component( 'to-do-list', {
     components: {
@@ -52,7 +55,7 @@
       addTask () {
         if (this.newTask.trim()) {
 
-          this.tasks.push({
+          this.tasks.unshift({
             id: Date.now(),
             text: this.newTask,
             done: false
@@ -62,7 +65,7 @@
         }
       },
 
-      makeTask (item) {
+      changeTask (item) {
         this.editTask = item;
       },
 
@@ -71,7 +74,7 @@
       },
 
       removeTask (item) {
-        this.tasks = this.tasks.filter( task => task.id !== item.id );
+        this.tasks.splice( this.tasks.indexOf(item), 1 );
       }
     }
   });

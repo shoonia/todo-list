@@ -2,16 +2,15 @@
 
   div(
     :class="{'list-group-item-success': task.done }",
-    :key="task.id"
     class="list-group-item mb-1"
   )
-    span(v-if="edit !== task")
+    span(v-if="editor !== task")
       span(@click="task.done = !task.done")
         span(:class="{'icon-checked': task.done, 'icon-unchecked': !task.done }").icon  
         span {{ ' ' + task.text }}
       span.close
         span(v-if="task.done", @click="remove(task)", role="button").icon.icon-bin.text-danger
-        span(v-else, @click="makeChange(task)", role="button").icon.icon-cog
+        span(v-else, @click="setChange(task)", role="button").icon.icon-cog
 
     span(v-else).input-group
       input(
@@ -29,7 +28,7 @@
         )
           span.icon.icon-bin
         button(
-          @click="saveChange",
+          @click="setChange",
           type="button",
           title="save",
           class="btn btn-success"
@@ -40,7 +39,7 @@
 
 <script>
   const ItemForTask = Vue.component( 'item-for-task', {
-    props: [ 'task', 'edit', 'makeChange', 'saveChange', 'remove' ]
+    props: [ 'task', 'editor', 'setChange', 'saveChange', 'remove' ]
   });
 
   export default ItemForTask;

@@ -1,0 +1,11 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s, transform .3s;
+  transform-origin: center;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(.5);
+}

@@ -2,7 +2,7 @@
   "name": "to-do-list",
   "version": "1.0.0",
   "description": "Simple website storing data in the client browser with the localStorage",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "webpack": "webpack --progress --color --watch",
     "build": "cross-env NODE_ENV=production webpack --progress --color"
@@ -33,6 +33,10 @@
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoonia/shoonia.github.io.git"
   },
   "author": "shoonia <zaytsev126@gmail.com>",
   "license": "MIT"
