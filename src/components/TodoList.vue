@@ -16,14 +16,17 @@
           button.btn.btn-dark
             | Add
 
-    div(v-for="task in tasks").list-group
-      item-for-task(
-        :task="task",
-        :edit="editTask",
-        :makeChange="makeTask", 
-        :saveChange="saveTask",
-        :remove="removeTask"
-      )
+    div(v-if="tasks.length > 0")
+      div(v-for="task in tasks").list-group
+        item-for-task(
+          :task="task",
+          :edit="editTask",
+          :makeChange="makeTask", 
+          :saveChange="saveTask",
+          :remove="removeTask"
+        )
+    div(v-else).text-center.text-secondary.lead.mt-5
+      | You don't have any tasks
 
 </template>
 
