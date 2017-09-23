@@ -26,8 +26,14 @@
 .icon-bin:before {
   content: "\e9ac";
 }
+.icon-notification:before {
+  content: "\ea08";
+}
 .icon-checkmark:before {
   content: "\ea10";
+}
+.icon-loop:before {
+  content: "\ea2e";
 }
 .icon-checked:before {
   content: "\ea52";

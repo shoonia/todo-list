@@ -1,6 +1,14 @@
+const initialState = {
+  tasks: [{ id: 0, text: 'Hi and welcom :)', done: true }],
+  newTask: ''
+};
+
 export default function getTasks () {
-  return [
-    { id: 0, text: 'test', done: false },
-    { id: 1, text: 'next', done: true }
-  ];
+  const store = localStorage.getItem('tasks');
+  if (store !== null) {
+    try {
+      return JSON.parse( store );
+    } catch (e) {}
+  }
+  return initialState;
 }

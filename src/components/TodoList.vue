@@ -1,6 +1,8 @@
 <template lang="pug">
 
   div
+    h1.display-4
+      | Todo List
     form(@submit.prevent="addTask").mb-3
       div.input-group
         input(
@@ -35,9 +37,10 @@
     },
 
     data () {
+      const store = getTasks();
       return {
-        tasks: getTasks(),
-        newTask: '',
+        tasks: Array.isArray( store.tasks ) ? store.tasks : [],
+        newTask: String( store.newTask ),
         editTask: null
       }
     },

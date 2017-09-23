@@ -7,3 +7,10 @@ const App = new Vue({
 });
 
 App.$mount('#app');
+
+window.addEventListener( 'unload', function () {
+  localStorage.setItem(
+    'tasks',
+    JSON.stringify( App.$children[0]._data )
+  );
+});
