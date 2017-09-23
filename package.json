@@ -1,7 +1,7 @@
 {
   "name": "to-do-list",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple website storing data in the client browser with the localStorage",
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --progress --color --watch",
