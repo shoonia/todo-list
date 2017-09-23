@@ -1,0 +1,26 @@
+.link {
+  color: grey;
+  font-size: 18px;
+  display: inline-block;
+  padding: 10px 20px;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.link--fecebook:hover {
+  color: #4862A3;
+}
+
+.link--github:hover {
+  color: #000;
+}
+
+.link--twitter:hover {
+  color: #4AB9FB;
+}
+
+.link--linkedin:hover {
+  color: #0073B2;
+}

@@ -176,7 +176,8 @@ module.exports = function normalizeComponent (
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(3);
+__webpack_require__(3);
+module.exports = __webpack_require__(12);
 
 
 /***/ }),
@@ -476,44 +477,47 @@ var render = function() {
     },
     [
       _vm.edit !== _vm.task
-        ? _c(
-            "span",
-            {
-              on: {
-                click: function($event) {
-                  _vm.task.done = !_vm.task.done
+        ? _c("span", [
+            _c(
+              "span",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.task.done = !_vm.task.done
+                  }
                 }
-              }
-            },
-            [
-              _c("span", [_vm._v(_vm._s(_vm.task.text))]),
-              _c("span", { staticClass: "close" }, [
-                _vm.task.done
-                  ? _c(
-                      "span",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.remove(_vm.task)
-                          }
-                        }
-                      },
-                      [_vm._v("remove")]
-                    )
-                  : _c(
-                      "span",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.makeChange(_vm.task)
-                          }
-                        }
-                      },
-                      [_vm._v("edit")]
-                    )
-              ])
-            ]
-          )
+              },
+              [
+                _c("span", {
+                  staticClass: "icon",
+                  class: {
+                    "icon-checked": _vm.task.done,
+                    "icon-unchecked": !_vm.task.done
+                  }
+                }),
+                _c("span", [_vm._v(_vm._s(" " + _vm.task.text))])
+              ]
+            ),
+            _c("span", { staticClass: "close" }, [
+              _vm.task.done
+                ? _c("span", {
+                    staticClass: "icon icon-bin text-danger",
+                    on: {
+                      click: function($event) {
+                        _vm.remove(_vm.task)
+                      }
+                    }
+                  })
+                : _c("span", {
+                    staticClass: "icon icon-cog",
+                    on: {
+                      click: function($event) {
+                        _vm.makeChange(_vm.task)
+                      }
+                    }
+                  })
+            ])
+          ])
         : _c("span", { staticClass: "input-group" }, [
             _c("input", {
               directives: [
@@ -549,15 +553,6 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-success",
-                  attrs: { type: "button", title: "save" },
-                  on: { click: _vm.saveChange }
-                },
-                [_vm._v("save")]
-              ),
-              _c(
-                "button",
-                {
                   staticClass: "btn btn-danger",
                   attrs: { type: "button", title: "remove?" },
                   on: {
@@ -566,7 +561,16 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("remove")]
+                [_c("span", { staticClass: "icon icon-bin" })]
+              ),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { type: "button", title: "save" },
+                  on: { click: _vm.saveChange }
+                },
+                [_c("span", { staticClass: "icon icon-checkmark" })]
               )
             ])
           ])
@@ -693,6 +697,12 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-3de47834", esExports)
   }
 }
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV;
 const PATH = {
@@ -10,7 +11,8 @@ const PATH = {
 const CONFIG = {
   context: PATH.src,
   entry: [
-    './index.js'
+    './index.js',
+    './index.scss'
   ],
   output: {
     path: PATH.public,
@@ -21,6 +23,9 @@ const CONFIG = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
       Vue: 'vue/dist/vue.min.js'
+    }),
+    new ExtractTextPlugin({
+      filename: 'style.css'
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -33,6 +38,15 @@ const CONFIG = {
       {
         test: /\.vue$/,
         use: 'vue-loader'
+      }, {
+        test: /\.(css|scss|sass)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'vue-style-loader',
+          use: [ 'css-loader', 'sass-loader' ]
+        })
+      }, {
+        test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'url-loader?limit=10000&mimetype=application/font-woff'
       }
     ]
   }

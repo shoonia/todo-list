@@ -5,13 +5,13 @@
     :key="task.id"
     class="list-group-item mb-1"
   )
-    span(v-if="edit !== task", @click="task.done = !task.done")
-      span {{ task.text }}
+    span(v-if="edit !== task")
+      span(@click="task.done = !task.done")
+        span(:class="{'icon-checked': task.done, 'icon-unchecked': !task.done }").icon  
+        span {{ ' ' + task.text }}
       span.close
-        span(v-if="task.done", @click="remove(task)")
-          | remove
-        span(v-else, @click="makeChange(task)")
-          | edit
+        span(v-if="task.done", @click="remove(task)").icon.icon-bin.text-danger
+        span(v-else, @click="makeChange(task)").icon.icon-cog
 
     span(v-else).input-group
       input(
@@ -22,19 +22,19 @@
       )
       span.input-group-btn
         button(
-          @click="saveChange",
-          type="button",
-          title="save",
-          class="btn btn-success"
-        )
-          | save
-        button(
           @click="remove(task)",
           type="button",
           title="remove?",
           class="btn btn-danger"
         )
-          | remove
+          span.icon.icon-bin
+        button(
+          @click="saveChange",
+          type="button",
+          title="save",
+          class="btn btn-success"
+        )
+          span.icon.icon-checkmark
 
 </template>
 
