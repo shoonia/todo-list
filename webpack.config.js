@@ -12,7 +12,7 @@ const CONFIG = {
   context: PATH.src,
   entry: [
     './index.js',
-    './index.scss'
+    './index.css'
   ],
   output: {
     path: PATH.public,
@@ -39,10 +39,10 @@ const CONFIG = {
         test: /\.vue$/,
         use: 'vue-loader'
       }, {
-        test: /\.(css|scss|sass)$/,
+        test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'vue-style-loader',
-          use: [ 'css-loader', 'sass-loader' ]
+          use: [ 'css-loader', 'postcss-loader' ]
         })
       }, {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
@@ -51,5 +51,30 @@ const CONFIG = {
     ]
   }
 };
+
+if (NODE_ENV === 'production') {
+  CONFIG.plugins.push(
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      compress: {
+        warnings: false,
+        drop_console: true,
+        unsafe: true
+      }
+    }),
+    new (require('optimize-css-assets-webpack-plugin'))({
+      cssProcessorOptions: {
+        discardComments: { removeAll: true }
+      }
+    }),
+    new (require('purifycss-webpack'))({
+      paths: (require('glob-all')).sync([
+        path.resolve( __dirname, './index.html' ),
+        path.resolve( PATH.src, './**/*.vue' )
+      ])
+    })
+  );
+}
 
 module.exports = CONFIG;

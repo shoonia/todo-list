@@ -10,8 +10,8 @@
         span(:class="{'icon-checked': task.done, 'icon-unchecked': !task.done }").icon  
         span {{ ' ' + task.text }}
       span.close
-        span(v-if="task.done", @click="remove(task)").icon.icon-bin.text-danger
-        span(v-else, @click="makeChange(task)").icon.icon-cog
+        span(v-if="task.done", @click="remove(task)", role="button").icon.icon-bin.text-danger
+        span(v-else, @click="makeChange(task)", role="button").icon.icon-cog
 
     span(v-else).input-group
       input(
