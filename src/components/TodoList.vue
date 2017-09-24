@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  div
+  div.col-md-10.col-12
     h1.display-4
       | Todo List
     form(@submit.prevent="addTask").mb-3
@@ -15,18 +15,21 @@
         div.input-group-btn
           button.btn.btn-dark
             | Add
-
-    div(v-if="tasks.length > 0")
-      transition-group(name="fade", tag="div").list-group
-          item-for-task(
-            v-for="task in tasks",
-            :key="task.id",
-            :task="task",
-            :editor="editTask",
-            :setChange="changeTask",
-            :saveChange="saveTask",
-            :remove="removeTask"
-          )
+    transition-group(
+      v-if="tasks.length > 0"
+      name="fade", 
+      tag="div",
+      class="list-group"
+    )
+      item-for-task(
+        v-for="task in tasks",
+        :key="task.id",
+        :task="task",
+        :editor="editTask",
+        :setChange="changeTask",
+        :saveChange="saveTask",
+        :remove="removeTask"
+      )
     div(v-else).text-center.text-secondary.lead.mt-5
       | You don't have any tasks
 
