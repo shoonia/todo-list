@@ -14,6 +14,7 @@
 
     span(v-else).input-group
       input(
+        v-autofocus,
         v-model="task.text",
         @keyup.enter="saveChange(task)",
         type="text",
@@ -40,6 +41,12 @@
 <script>
   const ItemForTask = Vue.component( 'item-for-task', {
     props: [ 'task', 'editor', 'setChange', 'saveChange', 'remove' ]
+  });
+
+  Vue.directive( 'autofocus', {
+    inserted (el) {
+      Vue.nextTick(() => el.focus());
+    }
   });
 
   export default ItemForTask;
