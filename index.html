@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="author" content="Aleksandr Zaytsev, https://github.com/shoonia">
-  <meta name="keywords" content="Vue.js 2, Bootstrap 4, CRUD">
-  <meta name="description" content="Simple CRUD application, storing data in the client browser with the localStorage">
-  <title>Todo List</title>
-  <link rel="shortcut icon" type="image/x-icon" href="public/favicon.ico">
-  <link rel="stylesheet" type="text/css" href="public/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Aleksandr Zaytsev, https://github.com/shoonia">
+    <meta name="keywords" content="Vue.js 2, Bootstrap 4, CRUD">
+    <meta name="description" content="Simple CRUD application, storing data in the client browser with the localStorage">
+    <title>Todo List</title>
+    <link rel="shortcut icon" type="image/x-icon" href="public/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="public/style.css">
 </head>
 <body>
 
-  <header class="navbar navbar-dark bg-dark mb-5">
-    <div class="container">
-      <a href="/" class="navbar-brand" title="reset">
-        <div class="icon icon-loop"></div>
-      </a>
-    </div>
-  </header>
+    <header class="navbar navbar-dark bg-dark mb-5">
+        <div class="container">
+            <a href="/" class="navbar-brand" title="reset">
+                <div class="icon icon-loop"></div>
+            </a>
+        </div>
+    </header>
 
-  <main class="container">
-    <div id="app" class="row justify-content-center">
-      <to-do-list /> <!-- Vue.js mounting place  -->
-    </div>
-  </main>
+    <main class="container">
+        <div id="app" class="row justify-content-center">
+          <todo-list /> <!-- Vue.js mounting place  -->
+        </div>
+    </main>
 
-  <noscript>
-    <div class="container">
-      <div class="jumbotron" role="alert">
-        <h1 class="display-4 text-danger">
-          <span class="icon icon-notification"></span>
-          JavaScript Required.
-        </h1>
-        <p class="lead">This site doesn't work without JavaScript enabled.</p>
-      </div>
-    </div>
-  </noscript>
+    <noscript>
+        <div class="container">
+            <div class="jumbotron" role="alert">
+                <h1 class="display-4 text-danger">
+                    <span class="icon icon-notification"></span>
+                    JavaScript Required.
+                </h1>
+                <p class="lead">This site doesn't work without JavaScript enabled.</p>
+            </div>
+        </div>
+    </noscript>
 
-  <footer class="fixed-bottom text-center bg-light">
-    <div class="container">
-      <a href="https://github.com/shoonia" class="link link--github">
-        <span class="icon icon-github"></span>
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=100007314793384" class="link link--fecebook">
-        <span class="icon icon-facebook"></span>
-      </a>
-      <a href="https://www.linkedin.com/in/shoonia" class="link link--linkedin">
-        <span class="icon icon-linkedin"></span>
-      </a>
-      <a href="https://twitter.com/_shoonia" class="link link--twitter">
-        <span class="icon icon-twitter"></span>
-      </a>
-    </div>
-  </footer>
-  
-  <script src="public/bundle.js"></script>
+    <footer class="fixed-bottom text-center bg-light">
+        <div class="container">
+            <a href="https://github.com/shoonia" class="link link--github">
+                <span class="icon icon-github"></span>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100007314793384" class="link link--fecebook">
+                <span class="icon icon-facebook"></span>
+            </a>
+            <a href="https://www.linkedin.com/in/shoonia" class="link link--linkedin">
+                <span class="icon icon-linkedin"></span>
+            </a>
+            <a href="https://twitter.com/_shoonia" class="link link--twitter">
+                <span class="icon icon-twitter"></span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="public/bundle.js"></script>
 </body>
 </html>

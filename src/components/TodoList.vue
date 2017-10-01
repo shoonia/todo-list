@@ -1,86 +1,85 @@
 <template lang="pug">
 
-  div.col-md-10.col-12
+div.col-md-10.col-12
     h1.display-4
-      | Todo List
+        | Todo List
     form(@submit.prevent="addTask").mb-3
-      div.input-group
-        input(
-          v-model="newTask",
-          type="text",
-          placeholder="What you should do...",
-          autofocus
-          class="form-control"
-        )
-        div.input-group-btn
-          button.btn.btn-dark
-            | Add
+        div.input-group
+            input(
+                v-model="newTask",
+                type="text",
+                placeholder="What you should do...",
+                autofocus
+                class="form-control"
+            )
+            div.input-group-btn
+                button.btn.btn-dark
+                    | Add
     transition-group(
-      v-if="tasks.length > 0"
-      name="fade", 
-      tag="div",
-      class="list-group"
+        v-if="tasks.length > 0"
+        name="fade",
+        tag="div",
+        class="list-group"
     )
-      item-for-task(
-        v-for="task in tasks",
-        :key="task.id",
-        :task="task",
-        :editor="editTask",
-        :setChange="changeTask",
-        :saveChange="saveTask",
-        :remove="removeTask"
-      )
+        task-item(
+            v-for="task in tasks",
+            :key="task.id",
+            :task="task",
+            :editor="editTask",
+            :setChange="changeTask",
+            :saveChange="saveTask",
+            :remove="removeTask"
+        )
     div(v-else).text-center.text-secondary.lead.mt-5
-      | You don't have any tasks
+        | You don't have any tasks
 
 </template>
-
 <script>
-  import ItemForTask from './ItemForTask.vue';
-  import getTasks from '../data/tasks';
-  import '../styles/fade.css'; /* class="fade-enter-active fade-leave-active fade-enter fade-leave-to" */
 
-  const TodoList = Vue.component( 'to-do-list', {
+import TaskItem from './TaskItem.vue';
+import getTasks from '../data/tasks';
+import '../styles/fade.css'; /* class="fade-enter-active fade-leave-active fade-enter fade-leave-to" */
+
+const TodoList = Vue.component( 'todo-list', {
     components: {
-      ItemForTask
+        TaskItem
     },
 
     data () {
-      const store = getTasks();
-      return {
-        tasks: Array.isArray( store.tasks ) ? store.tasks : [],
-        newTask: String( store.newTask ),
-        editTask: null
-      }
+        const store = getTasks();
+        return {
+            tasks: Array.isArray( store.tasks ) ? store.tasks : [],
+            newTask: String( store.newTask ),
+            editTask: null
+        }
     },
 
     methods: {
-      addTask () {
-        if (this.newTask.trim()) {
+        addTask () {
+            if (this.newTask.trim()) {
+                this.tasks.unshift({
+                    id: Date.now(),
+                    text: this.newTask,
+                    done: false
+                });
+                this.newTask = '';
+            }
+        },
 
-          this.tasks.unshift({
-            id: Date.now(),
-            text: this.newTask,
-            done: false
-          });
+        changeTask (item) {
+            this.editTask = item;
+        },
 
-          this.newTask = '';
+        saveTask () {
+            this.editTask = null;
+        },
+
+        removeTask (item) {
+            this.tasks.splice( this.tasks.indexOf(item), 1 );
         }
-      },
-
-      changeTask (item) {
-        this.editTask = item;
-      },
-
-      saveTask () {
-        this.editTask = null;
-      },
-
-      removeTask (item) {
-        this.tasks.splice( this.tasks.indexOf(item), 1 );
-      }
     }
-  });
+});
 
-  export default TodoList;
+export default TodoList;
+
 </script>
