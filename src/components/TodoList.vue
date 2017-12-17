@@ -15,30 +15,33 @@ div.col-md-10.col-12
             div.input-group-btn
                 button.btn.btn-dark
                     | Add
-    transition-group(
-        v-if="tasks.length > 0"
-        name="fade",
-        tag="div",
-        class="list-group"
-    )
-        task-item(
-            v-for="task in tasks",
-            :key="task.id",
-            :task="task",
-            :editor="editTask",
-            :setChange="changeTask",
-            :saveChange="saveTask",
-            :remove="removeTask"
+    div.fx-content
+        transition-group(
+            v-if="tasks.length > 0"
+            name="fade",
+            tag="div",
+            class="list-group"
         )
-    div(v-else).text-center.text-secondary.lead.mt-5
-        | You don't have any tasks
+            task-item(
+                v-for="task in tasks",
+                :key="task.id",
+                :task="task",
+                :editor="editTask",
+                :setChange="changeTask",
+                :saveChange="saveTask",
+                :remove="removeTask"
+            )
+        div(v-else).text-center.text-secondary.lead
+            | You don't have any tasks
 
 </template>
 <script>
 
 import TaskItem from './TaskItem.vue';
 import getTasks from '../data/tasks';
-import '../styles/fade.css'; /* class="fade-enter-active fade-leave-active fade-enter fade-leave-to" */
+import '../styles/fade.css';
+// for purify-css plugin:
+// class="fade-enter-active fade-leave-active fade-enter fade-leave-to"
 
 const TodoList = Vue.component( 'todo-list', {
     components: {

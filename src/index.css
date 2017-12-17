@@ -2,6 +2,21 @@
 @import "./styles/links.css";
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
+::selection {
+  color: #F8F9FA;
+  background-color: #212529;
+}
+
 body {
   background-color: #F8F9FA; 
+}
+
+.fx-content {
+  box-sizing: border-box;
+  min-height: 300px;
+  padding-bottom: 50px;
+}
+
+.fx-wrap {
+  overflow-wrap: break-word;
 }

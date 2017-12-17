@@ -7,7 +7,7 @@ div(
     span(v-if="editor !== task")
         span(@click="task.done = !task.done")
             span(:class="{'icon-checked': task.done, 'icon-unchecked': !task.done }").icon
-            span {{ ' ' + task.text }}
+            span.fx-wrap {{ ' ' + task.text }}
         span.close
             span(v-if="task.done", @click="remove(task)", role="button").icon.icon-bin.text-danger
             span(v-else, @click="setChange(task)", role="button").icon.icon-cog
