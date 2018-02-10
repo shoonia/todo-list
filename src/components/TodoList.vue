@@ -12,7 +12,7 @@ div.col-md-10.col-12
                 autofocus
                 class="form-control"
             )
-            div.input-group-btn
+            div.input-group-append
                 button.btn.btn-dark
                     | Add
     div.fx-content
@@ -40,8 +40,10 @@ div.col-md-10.col-12
 import TaskItem from './TaskItem.vue';
 import getTasks from '../data/tasks';
 import '../styles/fade.css';
-// for purify-css plugin:
-// class="fade-enter-active fade-leave-active fade-enter fade-leave-to"
+/* 
+ * for "purgecss-webpack-plugin":
+ * class="fade-enter-active fade-leave-active fade-enter fade-leave-to"
+ */
 
 const TodoList = Vue.component( 'todo-list', {
     components: {

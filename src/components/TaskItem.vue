@@ -20,7 +20,7 @@ div(
             type="text",
             class="form-control"
         )
-        span.input-group-btn
+        span.input-group-append
             button(
                 @click="remove(task)",
                 type="button",

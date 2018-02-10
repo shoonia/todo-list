@@ -69,7 +69,7 @@ if (NODE_ENV === 'production') {
                 discardComments: { removeAll: true }
             }
         }),
-        new (require('purifycss-webpack'))({
+        new (require('purgecss-webpack-plugin'))({
             paths: (require('glob-all')).sync([
                 path.resolve( __dirname, './index.html' ),
                 path.resolve( PATH.src, './**/*.vue' )
