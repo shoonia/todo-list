@@ -28,7 +28,7 @@ div.col-md-10.col-12
         :task="task",
         :editor="editTask",
         :setChange="changeTask",
-        :saveChange="saveTask",
+        :saveChange="writeChange",
         :remove="removeTask"
       )
     div(v-else).text-center.text-secondary.lead
@@ -38,6 +38,8 @@ div.col-md-10.col-12
 
 <script>
 import TaskItem from './TaskItem.vue';
+
+const defaultTasks = [{ id: 0, text: 'Hi and welcom :)', done: true }];
 
 export default {
   name: 'todo-list',
@@ -51,6 +53,10 @@ export default {
       editTask: null,
     };
   },
+  mounted() {
+    this.tasks = this.$ls.get('tasks', defaultTasks, Array);
+    this.newTask = this.$ls.get('newTask', '', String);
+  },
   methods: {
     addTask() {
       if (this.newTask.trim()) {
@@ -60,18 +66,26 @@ export default {
           done: false,
         });
         this.newTask = '';
+        this.writeChange();
       }
     },
     changeTask(item) {
       this.editTask = item;
     },
-    saveTask() {
+    writeChange() {
       this.editTask = null;
+      this.$ls.set('tasks', JSON.stringify(this.tasks));
     },
     removeTask(item) {
       this.tasks.splice(this.tasks.indexOf(item), 1);
+      this.writeChange();
     },
   },
+  watch: {
+    newTask(txt) {
+      this.$ls.set('newTask', txt);
+    }
+  }
 };
 </script>
 

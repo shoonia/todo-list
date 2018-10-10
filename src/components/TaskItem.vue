@@ -5,7 +5,7 @@ div(
   class="list-group-item mb-1"
 )
   span(v-if="editor !== task")
-    span(@click="task.done = !task.done")
+    span(@click="task.done = !task.done; saveChange()")
       span(:class="{'icon-checked': task.done, 'icon-unchecked': !task.done }").icon
       span.fx-wrap {{ ' ' + task.text }}
     span.close
@@ -29,7 +29,7 @@ div(
       )
         span.icon.icon-bin
       button(
-        @click="setChange",
+        @click="saveChange",
         type="button",
         title="save",
         class="btn btn-success"
