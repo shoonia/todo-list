@@ -39,7 +39,7 @@ div.col-md-10.col-12
 <script>
 import TaskItem from './TaskItem.vue';
 
-const defaultTasks = [{ id: 0, text: 'Hi and welcom :)', done: true }];
+const defaultTasks = [{ id: 0, text: 'Hi and welcome :)', done: true }];
 
 export default {
   name: 'todo-list',
